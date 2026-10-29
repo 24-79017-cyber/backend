@@ -2,8 +2,9 @@ import express from 'express';
 import booksRoutes from './routes/bookRoutes.js';
 import studentRoutes from './routes/studentRoutes.js';
 
-//create express app
 const app = express();
+
+app.use(express.json());
 
 app.use('/book', booksRoutes);
 app.use('/student', studentRoutes); 
@@ -15,4 +16,4 @@ try {
   });
 } catch(e) {
     console,log(e);
-} 
+}  
