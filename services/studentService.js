@@ -1,23 +1,22 @@
 import * as studentModel from '../models/studentModel.js';
 
-export const fetchAllStudents = async () => {
-  const students = await studentModel.fetch();
-  return students;
-};
-
-//update
-
-export const update = async (book) => {
-  const [result] = await pool.query (
-    "UPDATE book SET name= ?, author= ? WHERE id= ? ",
-    [book.name, book.author, book.id]
-  );
-  return result.affectedRows;
+export const fetchAllStudents = async() => {
+    const students = await studentModel.fetch();
+    return students;
 }
 
-//delete
-
-export const deleteBook = async(id) =>{
-    const deletedBook = await bookModel.remove(id);
-    return deletedBook;
+export const createStudent = async(student) => {
+    const studentId = await studentModel.insert(student);
+    return studentId;
 }
+
+export const updateStudent = async (student) => {
+    const updatedStudent = await studentModel.update(student);
+    return updatedStudent;
+}
+
+export const deleteStudent = async(id) => {
+    const deletedStudent = await studentModel.remove(id);
+    return deletedStudent;
+}
+

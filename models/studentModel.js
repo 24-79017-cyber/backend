@@ -1,27 +1,31 @@
 import pool from '../config/db.js';
 
-//READ
 export const fetch = async () => {
-  const [rows] = await pool.query('SELECT * FROM student');
-  return rows;
+    const [rows] = await pool.query ("SELECT * FROM student");
+    return rows;
 };
 
-//update
+export const insert = async (student) => {
+    const [result] = await pool.query (
+        "INSERT INTO student(name, srcode, program) VALUES (?, ?, ?)",
+        [student.name, student.srcode, student.program]
+    );
 
-export const update = async (student) => {
-  const [result] = await pool.query (
-    "UPDATE book SET name= ?, author= ? WHERE id= ? ",
-    [book.name, book.author, book.id]
-  );
-  return result.affectedRows;
+    return result.insertId;
 }
 
+export const update = async (student) => {
+    const [result] = await pool.query (
+        "UPDATE student SET name = ?, srcode = ?, program = ? WHERE id = ? ",
+        [student.name, student.srcode, student.program, student.id]
+    );
 
-//delete
+    return result.affectedRows;
+}
 
 export const remove = async (id) => {
     const [result] = await pool.query (
-        "DELETE FROM book WHERE id= ?", [id]
+        "DELETE FROM student WHERE id = ? ", [id]
     );
-    return result.affectedRows
+    return result.affectedRows;
 }
