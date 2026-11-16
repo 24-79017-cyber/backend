@@ -1,4 +1,17 @@
+
 import * as bookModel from '../models/bookModel.js';
+
+//START: VALIDATION 
+const doesBookExist = async (book) => {
+    const books = await bookModel.fetch();
+
+    return books.some(existingBook =>
+        existingBook.name.toLowerCase() === book.name.toLowerCase() &&
+        existingBook.author.toLowerCase() === book.author.toLowerCase() &&
+        existingBook.id !== book.id
+    );
+};
+//END: VALIDATION
 
 export const fetchAllBooks = async() => {
     const books = await bookModel.fetch();
@@ -6,11 +19,39 @@ export const fetchAllBooks = async() => {
 }
 
 export const createBook = async(book) => {
+
+    //START: VALIDATION 
+    if (!book.name || !book.author ||
+        !book.name.trim() || !book.author.trim()) {
+        throw new Error('Name and author is required!');
+    }
+
+    const existing = await doesBookExist(book);
+
+    if (existing) {
+        throw new Error('Book already exist!');
+    }
+    //END: VALIDATION
+
     const bookId = await bookModel.insert(book);
     return bookId;
 }
 
 export const updateBook = async (book) => {
+
+    //START: VALIDATION 
+    if (!book.name || !book.author ||
+        !book.name.trim() || !book.author.trim()) {
+        throw new Error('Name and author is required!');
+    }
+
+    const existing = await doesBookExist(book);
+
+    if (existing) {
+        throw new Error('Book already exist!');
+    }
+    //END: VALIDATION 
+
     const updatedBook = await bookModel.update(book);
     return updatedBook;
 }

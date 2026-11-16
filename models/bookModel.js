@@ -14,6 +14,8 @@ export const insert = async (book) => {
     return result.insertId;
 }
 
+//update 
+
 export const update = async (book) => {
     const [result] = await pool.query (
         "UPDATE book SET name = ?, author = ? WHERE id = ? ",
