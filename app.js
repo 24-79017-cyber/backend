@@ -1,12 +1,14 @@
 import express from "express";
 import bookRoute from './routes/bookRoutes.js';
 import studentRoute from './routes/studentRoutes.js';
+import userRoutes from "./routes/userRoutes.js";
 
 //create express app
 const app = express();
 app.use(express.json());
 
 app.use('/book', bookRoute);
+app.use('/user', userRoutes)
 app.use('/student', studentRoute);
 
 try {
