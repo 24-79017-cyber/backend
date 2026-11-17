@@ -1,7 +1,7 @@
 
 import * as studentModel from '../models/studentModel.js';
 
-//START: VALIDATION 
+//start validation
 const doesStudentExist = async (student) => {
     const students = await studentModel.fetch();
 
@@ -10,7 +10,7 @@ const doesStudentExist = async (student) => {
         existingStudent.id !== student.id
     );
 };
-//END: VALIDATION
+//end validation
 
 export const fetchAllStudents = async() => {
     const students = await studentModel.fetch();
@@ -19,7 +19,7 @@ export const fetchAllStudents = async() => {
 
 export const createStudent = async(student) => {
 
-    //START: VALIDATION
+    //start validation
     if (!student.name || !student.srcode || !student.program ||
         !student.name.trim() || !student.srcode.trim() || !student.program.trim()) {
         throw new Error('All fields are required!');
@@ -30,7 +30,7 @@ export const createStudent = async(student) => {
     if (existing) {
         throw new Error('Student SR Code already exists!');
     }
-    //END: VALIDATION
+    //end validation
 
     const studentId = await studentModel.insert(student);
     return studentId;
@@ -38,7 +38,7 @@ export const createStudent = async(student) => {
 
 export const updateStudent = async (student) => {
 
-    //START: VALIDATION 
+    //start validation
     if (!student.name || !student.srcode || !student.program ||
         !student.name.trim() || !student.srcode.trim() || !student.program.trim()) {
         throw new Error('All fields are required!');
@@ -49,7 +49,7 @@ export const updateStudent = async (student) => {
     if (existing) {
         throw new Error('Student SR Code already exists!');
     }
-    //END: VALIDATION 
+    //
 
     const updatedStudent = await studentModel.update(student);
     return updatedStudent;

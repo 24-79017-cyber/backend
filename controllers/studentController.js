@@ -11,14 +11,14 @@ export const createStudent = async (req, res) => {
     const {name, srcode, program} = req.body;
     const student = {name, srcode, program};
 
-    //START: VALIDATION 
+    //Start Validation 
     if (!name || !srcode || !program ||
         !name.trim() || !srcode.trim() || !program.trim()) {
         return res.status(400).json({
             error: "All fields are required!"
         });
     }
-    // END: VALIDATION 
+    //
 
     try {
         const studentId = await studentService.createStudent(student);
@@ -40,7 +40,7 @@ export const editStudent = async (req, res) => {
     const { id } = req.params;
     const student = {id: parseInt(id), name, srcode, program};
 
-    //START: VALIDATION 
+    //Start Validation
     if (!name || !srcode || !program ||
         !name.trim() || !srcode.trim() || !program.trim()) {
         return res.status(400).json({
@@ -53,7 +53,7 @@ export const editStudent = async (req, res) => {
             error: "Invalid student ID!"
         });
     }
-    //END: VALIDATION 
+    //
 
     try {
         const updatedStudent = await studentService.updateStudent(student);
@@ -79,7 +79,7 @@ export const deleteStudent = async (req, res) => {
             error: "Invalid student ID!"
         });
     }
-    //END: VALIDATION 
+    //
 
     try {
         const deletedStudent = await studentService.deleteStudent(parseInt(id));

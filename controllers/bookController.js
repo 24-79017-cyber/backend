@@ -11,13 +11,13 @@ export const createBook = async (req, res) => {
     const {name, author} = req.body;
     const book = {name, author};
 
-    //START: VALIDATION
+    //Start validation
     if (!name || !author || !name.trim() || !author.trim()) {
         return res.status(400).json({
             error: "Name and author is required!"
         });
     }
-    //END: VALIDATION
+    //end validation
 
     try {
         const bookId = await bookService.createBook(book);
@@ -38,7 +38,7 @@ export const editBook = async (req, res) => {
     const { id } = req.params;
     const book = {id: parseInt(id), name, author};
 
-    //START: VALIDATION
+    //start validtion
     if (!name || !author || !name.trim() || !author.trim()) {
         return res.status(400).json({
             error: "Name and author is required!"
@@ -50,7 +50,7 @@ export const editBook = async (req, res) => {
             error: "Invalid book ID!"
         });
     }
-    //END VALIDATION
+    //
 
     try {
         const updatedBook = await bookService.updateBook(book);
@@ -69,13 +69,13 @@ export const editBook = async (req, res) => {
 export const deleteBook = async (req, res) => {
     const { id } = req.params;
 
-    // ===== START: ADDITIONAL VALIDATION =====
+    //start add validation
     if (!Number.isInteger(Number(id)) || Number(id) <= 0) {
         return res.status(400).json({
             error: "Invalid book ID!"
         });
     }
-    //END: VALIDATION
+    //
 
     try {
         const deletedBook = await bookService.deleteBook(parseInt(id));

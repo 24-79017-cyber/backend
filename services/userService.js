@@ -4,7 +4,7 @@ import ValidationError from '../utils/ValidationError.js';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
-//START CHECK EXISTING USERS
+//Start check
 const doesUserExist = async (email) => {
     const existing = await userModel.findUserByEmail(email);
 
@@ -23,7 +23,7 @@ const doesUserExist = async (email) => {
 //
 
 
-//START CREATE ACCOUNT
+//start create account
 export const createAccount = async (user) => {
 
     //Required fields
@@ -78,7 +78,7 @@ export const createAccount = async (user) => {
 //
 
 
-//START LOGIN
+//start login
 export const login = async (user) => {
 
     if (!user.email || !user.password) {

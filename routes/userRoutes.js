@@ -4,7 +4,7 @@ import express from 'express';
 
 const userRoutes = express.Router();
 
-//START USER ROUTES
+//start user routes
 userRoutes.post('/new', userController.createAccount);
 userRoutes.post('/login', userController.login);
 //
