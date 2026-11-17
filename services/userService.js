@@ -4,7 +4,7 @@ import ValidationError from '../utils/ValidationError.js';
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 
-// ===== START: CHECK EXISTING USER =====
+//START CHECK EXISTING USERS
 const doesUserExist = async (email) => {
     const existing = await userModel.findUserByEmail(email);
 
@@ -20,34 +20,34 @@ const doesUserExist = async (email) => {
         user: null
     };
 }
-// ===== END: CHECK EXISTING USER =====
+//
 
 
-// ===== START: CREATE ACCOUNT =====
+//START CREATE ACCOUNT
 export const createAccount = async (user) => {
 
-    // Required fields
+    //Required fields
     if (!user.name || !user.email || !user.password) {
         throw new ValidationError(
             'Name, email and password is required!', 400
         );
     }
 
-    // Email validation
+    //Email validation
     if (!validator.isEmail(user.email)) {
         throw new ValidationError(
             'Improper email format.', 400
         );
     }
 
-    // Password validation
+    //Password validation
     if (!validator.isStrongPassword(user.password)) {
         throw new ValidationError(
             'Password is not strong enough.', 400
         );
     }
 
-    // Check existing email
+    //Check existing email
     const existing = await doesUserExist(user.email);
 
     if (existing.result) {
@@ -56,11 +56,11 @@ export const createAccount = async (user) => {
         );
     }
 
-    // Password hashing
+    //Password hashing
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(user.password, salt);
 
-    // Insert user
+    //Insert user
     const result = await userModel.insert({
         name: user.name,
         email: user.email,
@@ -75,10 +75,10 @@ export const createAccount = async (user) => {
 
     return 'Account created successfully!';
 }
-// ===== END: CREATE ACCOUNT =====
+//
 
 
-// ===== START: LOGIN =====
+//START LOGIN
 export const login = async (user) => {
 
     if (!user.email || !user.password) {
@@ -95,7 +95,7 @@ export const login = async (user) => {
         );
     }
 
-    // Compare password
+    //Compare password
     const isCorrectPassword = await bcrypt.compare(
         user.password,
         existing.user.password
@@ -109,4 +109,4 @@ export const login = async (user) => {
 
     return 'Login successfully!';
 }
-// ===== END: LOGIN =====
+// 

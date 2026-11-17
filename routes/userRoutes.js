@@ -4,9 +4,9 @@ import express from 'express';
 
 const userRoutes = express.Router();
 
-// ===== START: USER ROUTES =====
+//START USER ROUTES
 userRoutes.post('/new', userController.createAccount);
 userRoutes.post('/login', userController.login);
-// ===== END: USER ROUTES =====
+//
 
 export default userRoutes;

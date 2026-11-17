@@ -1,7 +1,7 @@
 
 import * as userService from '../services/userService.js';
 
-// ===== START: CREATE ACCOUNT =====
+//START CREATE ACCOUNT
 export const createAccount = async (req, res) => {
     const {name, email, password} = req.body;
     const user = {name, email, password};
@@ -22,10 +22,10 @@ export const createAccount = async (req, res) => {
         });
     }
 }
-// ===== END: CREATE ACCOUNT =====
+//
 
 
-// ===== START: LOGIN =====
+//START LOGIN 
 export const login = async (req, res) => {
     const {email, password} = req.body;
     const user = {email, password};
@@ -46,4 +46,4 @@ export const login = async (req, res) => {
         });
     }
 }
-// ===== END: LOGIN =====
+//
