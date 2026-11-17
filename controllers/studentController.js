@@ -73,7 +73,7 @@ export const editStudent = async (req, res) => {
 export const deleteStudent = async (req, res) => {
     const { id } = req.params;
 
-    //START: VALIDATION CODE
+    //start validation
     if (!Number.isInteger(Number(id)) || Number(id) <= 0) {
         return res.status(400).json({
             error: "Invalid student ID!"
